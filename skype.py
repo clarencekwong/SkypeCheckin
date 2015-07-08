@@ -117,8 +117,11 @@ def Commands(Message, Status):
                         elif message.startswith("%csgo"):
                             for i in range(4):
                                 chat.SendMessage("GOGOGOGOGOGGO")
+                        elif message.startswith("%jaime")
+                            chat.SendMessage(" >> Swiggity swoggity Jason wants to grab Jaime`s Booty")
                         elif message.startswith("%"):
                             chat.SendMessage(" >> Invalid command. Type in %help for assistance.")
+                            
 
 class TaskThread(threading.Thread):
     """Thread that executes a task every N seconds"""
