@@ -62,6 +62,60 @@ const commandTable = {
       
     })
   },
+  'tourney-status': function(args, data, successHandler, errorHandler) {
+    var sendParams = data.address;
+    sendParams.point_secret = config.POINT_SECRET
+    request
+    .get(config.API_ENDPOINT + 'poke-shuffle')
+    .send(sendParams)
+    .end(function(err, res) {
+      if (!err) {
+        let result = 'Current tourney entries:\n'
+        for (let i = 0; i < res.body.result.length; i++) {
+          let currentTrainer = res.body.result[i]
+          result += `${currentTrainer.user_name}: ${currentTrainer.friendly_name}\n`;
+        }
+        result === '' ? successHandler('No tourney is on!') : successHandler(result);
+      }
+      else {
+        errorHandler(`Error: ${err.response.body.error}`);        
+      }
+      
+    })
+  },
+  'tourney-enter': function(args, data, successHandler, errorHandler) {
+    var sendParams = data.address;
+    sendParams.friendly_name = args[0];
+    sendParams.point_secret = config.POINT_SECRET
+    request
+    .post(config.API_ENDPOINT + 'poke-shuffle')
+    .send(sendParams)
+    .end(function(err, res) {
+      if (!err) {
+        successHandler(res.body.result);
+      }
+      else {
+        errorHandler(`Error: ${err.response.body.error}`);        
+      }
+      
+    })
+  },
+  'tourney-leave': function(args, data, successHandler, errorHandler) {
+    var sendParams = data.address;
+    sendParams.point_secret = config.POINT_SECRET
+    request
+    .delete(config.API_ENDPOINT + 'poke-shuffle')
+    .send(sendParams)
+    .end(function(err, res) {
+      if (!err) {
+        successHandler(res.body.result);
+      }
+      else {
+        errorHandler(`Error: ${err.response.body.error}`);        
+      }
+      
+    })
+  },
   'message': function(args, data, successHandler, errorHandler) {
     if (!args.length) {
       request

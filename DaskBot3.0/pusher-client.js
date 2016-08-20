@@ -15,6 +15,7 @@ const PusherClient = function(botService) {
   const channelStreamer = pusher.subscribe('streamer');
   const channelCsgo = pusher.subscribe('csgo');
   const channelPoint = pusher.subscribe('point');
+  const channelPokeShuffle = pusher.subscribe('poke_shuffle');
   
   function broadcastSkype(successMessage, errorMessage) {
     request
@@ -52,15 +53,34 @@ const PusherClient = function(botService) {
      session.endDialog();
     },
   ]);
+  
+  botService.dialog('/tourney_start', [
+    function (session, data) {
+      let card = new builder.HeroCard(session)
+                            .title("A tourney has started! It ends in 8 hours.")
+                            .text(`The prize is ${data.result.friendly_name}!`)
+                            .images([
+                              builder.CardImage.create(session, `http://pokeunlock.com/wp-content/uploads/2015/03/${('000' + data.result.friendly_id).substr(-3)}.png`)
+                            ])
+                            .buttons([
+                              builder.CardAction.imBack(session, `tourney-status`, "Status!")
+                            ]);
+     let msg = new builder.Message()
+                   .attachments([card]);
+     session.send(msg);
+     session.endDialog();
+    },
+  ]);
 
-  function handlePointsSkype(data, successMessage, errorMessage) {
+
+  function handlePointsSkype(data, dialog_name, successMessage, errorMessage) {
     request
     .get(config.API_ENDPOINT + 'skype2')
     .end(function(err, res) {
       if (!err) {
         let result = res.body.result;
         for (let i = 0; i < result.length; i++) {
-          botService.beginDialog(result[i], '/points', data);
+          botService.beginDialog(result[i], dialog_name, data);
         }
       }
       else {
@@ -98,10 +118,28 @@ const PusherClient = function(botService) {
   })
   
   channelPoint.bind('point_created', function(data) {
-    handlePointsSkype(data,
-                      `--> There is a point for grabs! Type 'take ${data.result.id}' to grab it before anyone else does!`,
-                      'Error on broadcasting point_created. [point_created]');
+    handlePointsSkype(data, '/points')
+                      //`--> There is a point for grabs! Type 'take ${data.result.id}' to grab it before anyone else does!`,
+                      //'Error on broadcasting point_created. [point_created]');
   })
+  
+  channelPokeShuffle.bind('tourney_start', function(data) {
+    handlePointsSkype(data, '/tourney_start')
+  })
+  
+  channelPokeShuffle.bind('tourney_end', function(data) {
+    broadcastSkype(newLinesToBreaks(data.result),
+                   'Error on broadcasting tourney_end. [tourney_end]');
+  })
+  
+  channelPokeShuffle.bind('tourney_reminder', function(data) {
+    broadcastSkype(newLinesToBreaks(data.result),
+                   'Error on broadcasting tourney_reminder. [tourney_reminder]');
+  })
+}
+
+function newLinesToBreaks(msg) {
+  return msg.replace(/\n/g, '<br/>');
 }
 
 module.exports = PusherClient
