@@ -54,7 +54,7 @@ const commandTable = {
     .send(sendParams)
     .end(function(err, res) {
       if (!err) {
-        successHandler(`${res.body.result.user.name} successfully fully captured a ${res.body.result.friendly_name}! ${config.FRONTEND_DOMAIN}pokemon.`);
+        successHandler(`${res.body.result.user.name} successfully captured a ${res.body.result.friendly_name}! ${config.FRONTEND_DOMAIN}pokemon.`);
       }
       else {
         errorHandler(`Error: ${err.response.body.error}`);        
