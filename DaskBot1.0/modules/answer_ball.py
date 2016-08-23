@@ -1,6 +1,6 @@
 import random
 
-ballAnswers = ["It is certain",
+BALL_ANSWERS = ["It is certain",
 "It is decidedly so",
 "Without a doubt",
 "Yes definitely",
@@ -21,5 +21,5 @@ ballAnswers = ["It is certain",
 "Outlook not so good",
 "Very doubtful"]
 
-def get8BallAnswer():
-	return ballAnswers[random.randint(0,19)]
+def get_8_ball_answer():
+    return BALL_ANSWERS[random.randint(0, len(BALL_ANSWERS)-1)]

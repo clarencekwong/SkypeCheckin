@@ -1,0 +1,7 @@
+*.pyc
+MOTD.txt
+streamers.txt
+misc.txt
+*.csv
+node_modules
+*.tar.gz
