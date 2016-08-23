@@ -121,11 +121,11 @@ const commandTable = {
     })
   },
   'tourney-help': function(args, data, successHandler, errorHandler) {
-    successHandler("<u>Tournaments consists of 3 phases:</u>\n" +
-                    "<b>1</b>. Tourney starts, a prize pokemon is announced. The tournament lasts for 8 hours.\n" +
+    successHandler("<u>Tournaments consist of 3 phases:</u>\n" +
+                    "<b>1</b>. A tourney starts, and a prize pokemon is announced. The tourney lasts for 8 hours.\n" +
                     "<b>2</b>. Players enter the tourney with at max 1 pokemon using the command `tourney-enter [pokemon|id]`. Your winrate is directly proportional to the value of the pokemon entered. You may replace " +
                     "or remove pokemon with `tourney-enter [pokemon|id]` and `tourney-leave` respectively. It is known that better pokemon entered increase expected payout.\n" +
-                    "<b>3</b>. DaskBot will notify the chat if there is 1 hour or 15 minutes remaining in the tourney. The tourney ends and the prizes are distributed to the winner. A new tourney starts immediately after.");
+                    "<b>3</b>. DaskBot will notify the chat if there are 1 hour or 15 minutes remaining in the tourney. The tourney ends, and the prizes are distributed to the winner. A new tourney starts immediately after.");
   },
   'my-pokemon': function(args, data, successHandler, errorHandler) {
     var sendParams = data.address;
