@@ -76,7 +76,7 @@ bot.on('typing', function (message) {
 //=========================================================
 
 function newLinesToBreaks(msg) {
-  return msg.replace(/\n/g, '<br/>');
+  return msg.replace(/(^\s+|\s+$)/g,'').replace(/\n/g, '<br/>');
 }
 
 function removeMention(msg) {

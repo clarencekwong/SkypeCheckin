@@ -58,7 +58,7 @@ const PusherClient = function(botService) {
     function (session, data) {
       let card = new builder.HeroCard(session)
                             .title("A tourney has started! It ends in 8 hours.")
-                            .text(`The prize is ${data.result.friendly_name}!`)
+                            .text(`The prize is ${data.result.friendly_name}(${data.result.friendly_id})!`)
                             .images([
                               builder.CardImage.create(session, `http://pokeunlock.com/wp-content/uploads/2015/03/${('000' + data.result.friendly_id).substr(-3)}.png`)
                             ])
