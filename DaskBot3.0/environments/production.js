@@ -6,7 +6,5 @@ module.exports = {
   API_ENDPOINT: 'https://www.soulwalrus.club/v1/',
   FRONTEND_DOMAIN: 'https://www.soulwalrus.club/',
   PUSHER_KEY: 'f35ce6a52f1fc2a358fa',
-  MASHAPE_KEY: process.env.MASHAPE_KEY,
-  ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY,
   POINT_SECRET: process.env.POINT_SECRET
 }
