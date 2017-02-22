@@ -214,7 +214,7 @@ const commandTable = {
         var resultObj = res.body.result;
         var resultString = 'Results:\n'
         for (var key in resultObj) {
-          resultString += `${key}: ${resultObj[key]}\n`;
+          resultString += `${resultObj[key].user_name}: ${resultObj[key].points}\n`;
         }
         successHandler(resultString);
       }
