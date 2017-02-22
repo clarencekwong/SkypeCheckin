@@ -40,9 +40,9 @@ const PusherClient = function(botService) {
     function (session, data) {
       let card = new builder.HeroCard(session)
                             .title("A pokemon has appeared!")
-                            .text(`It's ${data.result.friendly_name}!`)
+                            .text(`It's ${data.result.friendly_name} (${data.result.friendly_id})!`)
                             .images([
-                              builder.CardImage.create(session, `http://pokeunlock.com/wp-content/uploads/2015/03/${('000' + data.result.friendly_id).substr(-3)}.png`)
+                              builder.CardImage.create(session, `https://s3.amazonaws.com/soulwalruspokemon/${('000' + data.result.friendly_id).substr(-3)}.png`)
                             ])
                             .buttons([
                               builder.CardAction.imBack(session, `catch ${data.result.id}`, "Catch It!")
@@ -60,7 +60,7 @@ const PusherClient = function(botService) {
                             .title("A tourney has started! It ends in 8 hours.")
                             .text(`The prize is ${data.result.friendly_name}(${data.result.friendly_id})!`)
                             .images([
-                              builder.CardImage.create(session, `http://pokeunlock.com/wp-content/uploads/2015/03/${('000' + data.result.friendly_id).substr(-3)}.png`)
+                              builder.CardImage.create(session, `https://s3.amazonaws.com/soulwalruspokemon/${('000' + data.result.friendly_id).substr(-3)}.png`)
                             ])
                             .buttons([
                               builder.CardAction.imBack(session, `tourney-status`, "Status!")
