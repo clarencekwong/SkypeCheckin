@@ -40,7 +40,7 @@ const PusherClient = function(botService) {
     function (session, data) {
       let card = new builder.HeroCard(session)
                             .title("A pokemon has appeared!")
-                            .text(`It's ${data.result.friendly_name} (${data.result.friendly_id})[${data.result.value}]!`)
+                            .text(`It's ${data.result.friendly_name} (${data.result.friendly_id}|${data.result.value})!`)
                             .images([
                               builder.CardImage.create(session, `https://s3.amazonaws.com/soulwalruspokemon/${('000' + data.result.friendly_id).substr(-3)}.png`)
                             ])
@@ -58,7 +58,7 @@ const PusherClient = function(botService) {
     function (session, data) {
       let card = new builder.HeroCard(session)
                             .title("A tourney has started! It ends in 8 hours.")
-                            .text(`The prize is ${data.result.friendly_name}(${data.result.friendly_id})[${data.result.value}]!`)
+                            .text(`The prize is ${data.result.friendly_name}(${data.result.friendly_id}|${data.result.value})!`)
                             .images([
                               builder.CardImage.create(session, `https://s3.amazonaws.com/soulwalruspokemon/${('000' + data.result.friendly_id).substr(-3)}.png`)
                             ])
