@@ -77,7 +77,7 @@ const commandTable = {
         let result = 'Current tourney entries:\n'
         for (let i = 0; i < res.body.result.length; i++) {
           let currentTrainer = res.body.result[i]
-          result += `${currentTrainer.user_name}: ${currentTrainer.friendly_name}\n`;
+          result += `${currentTrainer.user_name}: ${currentTrainer.friendly_name} (${currentTrainer.friendly_id}|${currentTrainer.value})\n`;
         }
         result === '' ? successHandler('No tourney is on!') : successHandler(result);
       }
